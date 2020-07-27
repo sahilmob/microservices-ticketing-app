@@ -14,5 +14,13 @@ build:
               dockerfile: Dockerfile
           sync:
               manual:
-                  - src: "srx/**/*.ts"
+                  - src: "src/**/*.ts"
+                    dest: .
+        - image: sahilmob/client
+          context: client
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "**/*.js"
                     dest: .
