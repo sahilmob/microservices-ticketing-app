@@ -1,7 +1,9 @@
 import express from "express";
 import cookieSession from "cookie-session";
 import "express-async-errors";
-import { NotFoundError, errorHandler } from "@smtickets1/common";
+import { NotFoundError, errorHandler, currentUSer } from "@smtickets1/common";
+
+import { newRouter } from "./routes/new";
 
 const app = express();
 app.set("trust proxy", true);
@@ -12,6 +14,9 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   })
 );
+app.use(currentUSer);
+
+app.use(newRouter);
 
 app.all("*", async (_req, _res) => {
   throw new NotFoundError();
