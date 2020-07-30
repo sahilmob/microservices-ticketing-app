@@ -16,6 +16,14 @@ build:
               manual:
                   - src: "src/**/*.ts"
                     dest: .
+        - image: sahilmob/tickets
+          context: tickets
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
         - image: sahilmob/client
           context: client
           docker:
