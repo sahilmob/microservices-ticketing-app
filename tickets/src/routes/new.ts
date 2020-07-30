@@ -30,7 +30,7 @@ router.post(
     });
 
     await newTicket.save();
-    return res.send(201);
+    return res.status(201).send(newTicket);
   }
 );
 
