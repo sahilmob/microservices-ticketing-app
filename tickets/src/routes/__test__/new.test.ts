@@ -46,7 +46,6 @@ it("creates a ticket with valid input ", async () => {
     .send({
       title: "title",
       price: 10,
-      userId: "123",
     })
     .expect(201);
 

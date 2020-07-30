@@ -8,7 +8,7 @@ import { app } from "../app";
 declare global {
   namespace NodeJS {
     interface Global {
-      signup(): string[];
+      signup(userId?: String): string[];
     }
   }
 }
@@ -40,9 +40,9 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-global.signup = () => {
+global.signup = (userId = "123") => {
   const payload = {
-    id: "123",
+    id: userId,
     email: "test@test.com",
   };
 

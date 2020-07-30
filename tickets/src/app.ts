@@ -6,6 +6,7 @@ import { NotFoundError, errorHandler, currentUSer } from "@smtickets1/common";
 import { newRouter } from "./routes/new";
 import { showRouter } from "./routes/show";
 import { indexRouter } from "./routes/index";
+import { updateRouter } from "./routes/update";
 
 const app = express();
 app.set("trust proxy", true);
@@ -21,6 +22,7 @@ app.use(currentUSer);
 app.use(newRouter);
 app.use(showRouter);
 app.use(indexRouter);
+app.use(updateRouter);
 
 app.all("*", async (_req, _res) => {
   throw new NotFoundError();
