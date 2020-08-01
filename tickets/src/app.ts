@@ -1,7 +1,7 @@
 import express from "express";
 import cookieSession from "cookie-session";
 import "express-async-errors";
-import { NotFoundError, errorHandler, currentUSer } from "@smtickets1/common";
+import { NotFoundError, errorHandler, currentUser } from "@smtickets1/common";
 
 import { newRouter } from "./routes/new";
 import { showRouter } from "./routes/show";
@@ -17,7 +17,7 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   })
 );
-app.use(currentUSer);
+app.use(currentUser);
 
 app.use(newRouter);
 app.use(showRouter);
