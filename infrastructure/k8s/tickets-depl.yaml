@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tickets
-          image: sahilmob/auth
+          image: sahilmob/tickets
           env:
             - name: JWT_KEY
               valueFrom:
