@@ -1,7 +1,7 @@
 import request from "supertest";
 
 import { app } from "../../app";
-import { Ticket, OrderDoc } from "../../models";
+import { Ticket } from "../../models";
 
 const createTicket = async (price = 10, title = "concert") => {
   const newTicket = Ticket.build({
