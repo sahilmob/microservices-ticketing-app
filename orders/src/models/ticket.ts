@@ -4,6 +4,7 @@ import { OrderStatus } from "@smtickets1/common";
 import { Order } from "./order";
 
 interface TicketAttrs {
+  id: string;
   title: string;
   price: number;
 }
@@ -42,7 +43,11 @@ const ticketSchema = new mongoose.Schema(
 );
 
 ticketSchema.statics.build = (attars: TicketAttrs) => {
-  return new Ticket(attars);
+  return new Ticket({
+    _id: attars.id,
+    title: attars.title,
+    price: attars.price,
+  });
 };
 
 ticketSchema.methods.isReserved = async function () {
