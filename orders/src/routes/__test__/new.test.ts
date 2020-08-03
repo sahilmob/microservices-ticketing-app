@@ -4,6 +4,7 @@ import { OrderStatus } from "@smtickets1/common";
 
 import { app } from "../../app";
 import { Ticket, Order } from "../../models";
+import { natsWrapper } from "../../nats-wrapper";
 
 it("returns an error if the ticket doesn't exist", async () => {
   await request(app)
@@ -59,4 +60,6 @@ it("reserves a ticket", async () => {
       ticketId: newTicket.id,
     })
     .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
 });

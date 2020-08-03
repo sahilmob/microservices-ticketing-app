@@ -3,6 +3,7 @@ import { OrderStatus } from "@smtickets1/common";
 
 import { app } from "../../app";
 import { Ticket } from "../../models";
+import { natsWrapper } from "../../nats-wrapper";
 
 const createTicket = async (price = 10, title = "concert") => {
   const newTicket = Ticket.build({
@@ -56,4 +57,5 @@ it("allows the user to delete his orders only", async () => {
     .expect(200);
 
   expect(body.status).toBe(OrderStatus.Cancelled);
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
 });
