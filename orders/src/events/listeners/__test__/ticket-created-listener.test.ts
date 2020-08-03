@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Message } from "node-nats-streaming";
 import { TicketCreatedEvent } from "@smtickets1/common";
 
-import { TicketCreatedListener } from "../ticket-created-listener";
+import { TicketCreatedListener } from "../";
 import { natsWrapper } from "../../../nats-wrapper";
 import { Ticket } from "../../../models";
 
