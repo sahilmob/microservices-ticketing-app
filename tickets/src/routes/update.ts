@@ -4,6 +4,7 @@ import {
   requireAuth,
   validateRequest,
   NotAuthorized,
+  BadRequestError,
 } from "@smtickets1/common";
 import { body } from "express-validator";
 
@@ -36,6 +37,8 @@ router.put(
     const ticket = await Ticket.findById(id);
 
     if (!ticket) throw new NotFoundError();
+
+    if (ticket.orderId) throw new BadRequestError("Ticket reserved");
 
     if (ticket.userId !== currentUser!.id) throw new NotAuthorized();
 
