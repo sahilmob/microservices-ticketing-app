@@ -51,3 +51,15 @@ it("acks the message", async () => {
 
   expect(message.ack).toHaveBeenCalled();
 });
+
+it("doesn't call ack if the event number is incorrect", async () => {
+  const { listener, message, data } = await setup();
+
+  data.version = 10;
+
+  try {
+    await listener.onMessage(data, message);
+  } catch (error) {}
+
+  expect(message.ack).not.toHaveBeenCalled();
+});
