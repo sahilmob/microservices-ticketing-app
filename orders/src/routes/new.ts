@@ -60,6 +60,7 @@ router.post(
         price: ticket.price,
       },
       userId: req.currentUser!.id,
+      version: newOrder.version,
     });
 
     return res.status(201).send(newOrder);
