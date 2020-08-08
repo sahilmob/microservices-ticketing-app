@@ -3,6 +3,8 @@ import cookieSession from "cookie-session";
 import "express-async-errors";
 import { NotFoundError, errorHandler, currentUser } from "@smtickets1/common";
 
+import { createChargeRouter } from "./routes/new";
+
 const app = express();
 app.set("trust proxy", true);
 app.use(express.json());
@@ -13,6 +15,7 @@ app.use(
   })
 );
 app.use(currentUser);
+app.use(createChargeRouter);
 
 app.all("*", async (_req, _res) => {
   throw new NotFoundError();
