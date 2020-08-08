@@ -26,7 +26,7 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      enum: OrderStatus,
+      enum: Object.values(OrderStatus),
     },
     userId: {
       type: String,
@@ -50,8 +50,6 @@ const orderSchema = new mongoose.Schema(
 orderSchema.set("versionKey", "version");
 orderSchema.plugin(updateIfCurrentPlugin);
 
-const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);
-
 orderSchema.statics.build = (attrs: OrderAttrs) => {
   return new Order({
     _id: attrs.id,
@@ -62,4 +60,5 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
   });
 };
 
+const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);
 export { Order };
