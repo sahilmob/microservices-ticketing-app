@@ -1,11 +1,5 @@
-import {
-  Listener,
-  OrderCreatedEvent,
-  OrderStatus,
-  Subjects,
-} from "@smtickets1/common";
+import { Listener, OrderCreatedEvent, Subjects } from "@smtickets1/common";
 import { Message } from "node-nats-streaming";
-import mongoose from "mongoose";
 
 import { queueGroupName } from "./";
 import { Order } from "../../models/Order";
@@ -20,11 +14,11 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     if (existingOrder) throw new Error("Order already exists");
 
     const order = Order.build({
-      id: mongoose.Types.ObjectId().toHexString(),
+      id: data.id,
       price: data.ticket.price,
-      status: OrderStatus.Created,
+      status: data.status,
       userId: data.userId,
-      version: 0,
+      version: data.version,
     });
 
     await order.save();
